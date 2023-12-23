@@ -1,0 +1,112 @@
+@if (alertTipo == 1) {
+<div class="alert alert-success" role="alert">
+  {{ alertSMS }}
+</div>
+} @if (alertTipo == 2) {
+<div class="alert alert-danger" role="alert">
+  {{ alertSMS }}
+</div>
+}
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <h1 class="h3 mb-3 fw-normal">Suscribirse</h1>
+    <input id="id" type="text" [formControl]="id" hidden />
+    <div class="form-floating">
+      <input
+        type="text"
+        class="form-control"
+        name="nombreCompleto"
+        id="nombreCompleto"
+        [formControl]="nombreCompleto"
+        placeholder="Tus nombres..."
+      />
+      <label for="floatingInput">Nombre completo</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="email"
+        class="form-control"
+        name="correo"
+        id="correo"
+        [formControl]="correo"
+        placeholder="name@example.com"
+      />
+      <label for="floatingInput">Correo electrónico</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="number"
+        class="form-control"
+        name="celular"
+        id="celular"
+        [formControl]="celular"
+        placeholder="Celular..."
+      />
+      <label for="floatingInput">Whatsapp</label>
+    </div>
+    @if (btnNuevoModificar == 1) {
+    <button
+      class="btn btn-primary w-100 py-2"
+      type="button"
+      (click)="nuevoSuscrito()"
+    >
+      Registrar nuevo
+    </button>
+    } @else {
+    <div class="btn-group w-100" role="group" aria-label="Default button group">
+      <button type="button" class="btn btn-success" (click)="updateDato()">
+        Actualizar
+      </button>
+      <button
+        (click)="cancelarBtn()"
+        type="button"
+        class="btn btn-outline-dark"
+      >
+        Cancelar
+      </button>
+    </div>
+    }
+  </div>
+  <div class="col-md-6">
+    <h2>Seguidores de cristo</h2>
+    <div class="table-responsive small">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Correo electrónico</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Celular</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (m of suscritos; track m.id) {
+          <tr>
+            <td>{{ m.id }}</td>
+            <td>{{ m.correo }}</td>
+            <td>{{ m.nombreCompleto }}</td>
+            <td>{{ m.celular }}</td>
+            <td>
+              <button
+                class="btn btn-sm btn-outline-warning"
+                (click)="
+                  updateName(m.id, m.nombreCompleto, m.correo, m.celular)
+                "
+              >
+                Editar
+              </button>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="deleteDato(m.id)"
+              >
+                Borrar
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
